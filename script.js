@@ -10,8 +10,7 @@ const game = function () {
       console.log((userNumber));
       if (userNumber === 0) {
          return;
-      } else
-      if (userNumber > randomNum) {
+      } else if (userNumber > randomNum) {
          alert('Загаданное число меньше');
          return repeat();
       } else if (userNumber < randomNum) {
@@ -21,11 +20,11 @@ const game = function () {
          alert('Ты угадал!');
          const choice = confirm('Сыграем еще раз?');
          if (choice === true) {
-             game()();
+            game()();
          } else {
             return;
          }
-      } 
+      }
       if (!isNumber(userNumber)) {
          alert('Надо вводить число!');
          return repeat();
