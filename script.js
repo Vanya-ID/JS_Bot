@@ -1,39 +1,35 @@
 'use strict';
-alert('Угадай число от 1 до 100');
-function random() {
-   let num = Math.ceil(Math.random() * 100);
-   console.log(num);
-   return num;
-}
-let tryToGuess = random();
-
-
-
-
-function firstguess() {
-   let x = +prompt('Введите число от 1 до 100');
-   console.log(x);
-   if (Number.isInteger(x)) {
-      if (x === tryToGuess) {
-         alert('Ты угадал число, поздравляю');
-         let tryMore = confirm('Сыграем еще?');
-         if (tryMore === true) {
-            random();
-            firstguess();
+const isNumber = function (n) {
+   return !isNaN(parseFloat(n)) && isFinite(n);
+};
+const game = function () {
+   let randomNum = Math.ceil(Math.random() * 100);
+   console.log(randomNum);
+   return function repeat() {
+      let userNumber = +prompt('Введите значение');
+      console.log((userNumber));
+      if (userNumber === 0) {
+         return;
+      } else
+      if (userNumber > randomNum) {
+         alert('Загаданное число меньше');
+         return repeat();
+      } else if (userNumber < randomNum) {
+         alert('Загаданное число больше');
+         return repeat();
+      } else if (userNumber === randomNum) {
+         alert('Ты угадал!');
+         const choice = confirm('Сыграем еще раз?');
+         if (choice === true) {
+             game()();
          } else {
-            alert('Игра завершена');
             return;
          }
-      } else if (x > tryToGuess) {
-         alert('Загаданое число меньше. Попробуйте еще раз');
-         firstguess();
-      } else if (x < tryToGuess) {
-         alert('Загаданое число больше. Поробуйте еще раз');
-         firstguess();
+      } 
+      if (!isNumber(userNumber)) {
+         alert('Надо вводить число!');
+         return repeat();
       }
-   } else {
-      alert('Надо вводить число');
-      firstguess();
-   }
-}
-firstguess();
+   };
+};
+game()();
